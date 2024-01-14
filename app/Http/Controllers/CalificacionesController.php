@@ -14,7 +14,10 @@ class CalificacionesController extends Controller
      */
     public function index()
     {
-        //
+        $calificaciones = Calificaciones::with(['alumno', 'materia'])->get();
+
+        return view('calificaciones.index', compact('calificaciones'));
+    
     }
 
     /**
@@ -35,7 +38,16 @@ class CalificacionesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Valida y guarda la calificación en la base de datos
+        $request->validate([
+            'alumno_id' => 'required|exists:alumnos,id',
+            'maestro_id' => 'required|exists:maestros,id',
+            'calificacion' => 'required|integer|min:0|max:100',
+        ]);
+
+        Calificaciones::create($request->all());
+
+        return redirect()->route('calificaciones.index')->with('success', 'Calificación registrada exitosamente');
     }
 
     /**
