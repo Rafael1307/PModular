@@ -16,4 +16,14 @@ class Materias extends Model
         return $this->hasMany(Calificaciones::class, 'id_materia');
     }
 
+    public function grupo()
+    {
+        return $this->belongsTo(Grupos::class, 'id_grupo');
+    }
+
+    public function maestro()
+    {
+        return $this->belongsTo(Maestros::class, 'id_maestro');
+    }
+
 }

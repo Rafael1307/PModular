@@ -10,4 +10,16 @@ class Maestros extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'correo', 'email');
+    }
+
+    public function grupos()
+    {
+        return $this->hasMany(Grupos::class, 'id_asesor');
+    }
+
 }

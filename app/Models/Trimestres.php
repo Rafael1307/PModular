@@ -10,4 +10,24 @@ class Trimestres extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function ciclo()
+    {
+        return $this->belongsTo(Ciclos::class, 'id_ciclo');
+    }
+
+    public function desgloceCalificaciones()
+    {
+        return $this->hasMany(Desgloce_Calificaciones::class, 'id_trimestre');
+    }
+
+    public function calificaciones()
+    {
+        return $this->hasMany(Calificaciones::class, 'id_trimestre');
+    }
+
+    public function asistencias()
+    {
+        return $this->hasMany(Asistencias::class, 'id_trimestre');
+    }
 }

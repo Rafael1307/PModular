@@ -20,4 +20,9 @@ class Calificaciones extends Model
     {
         return $this->belongsTo(Materias::class, 'id_materia');
     }
+
+    public function trimestre()
+    {
+        return $this->belongsTo(Trimestres::class, 'id_trimestre');
+    }
 }

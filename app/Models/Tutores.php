@@ -10,4 +10,9 @@ class Tutores extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function alumnos()
+    {
+        return $this->belongsToMany(Alumnos::class, 'alumnos_tutores', 'id_tutor', 'id_alumno');
+    }
 }

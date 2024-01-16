@@ -10,4 +10,14 @@ class Asistencias extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function alumno()
+    {
+        return $this->belongsTo(Alumnos::class, 'id_alumno');
+    }
+
+    public function trimestre()
+    {
+        return $this->belongsTo(Trimestres::class, 'id_trimestre');
+    }
 }

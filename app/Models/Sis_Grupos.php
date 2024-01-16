@@ -10,4 +10,14 @@ class Sis_Grupos extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function ciclo()
+    {
+        return $this->belongsTo(Ciclos::class, 'id_ciclo');
+    }
+
+    public function alumnos()
+    {
+        return $this->hasMany(Alumnos::class, 'id_sis');
+    }
 }
