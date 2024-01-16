@@ -23,7 +23,7 @@ class CreateGruposTable extends Migration
             $table->foreign('id_asesor')->references('id')->on('maestros');
             $table->unsignedBigInteger('id_ciclo');
             $table->foreign('id_ciclo')->references('id')->on('ciclos');
-
+            $table->softDeletes();
 
         });
     }

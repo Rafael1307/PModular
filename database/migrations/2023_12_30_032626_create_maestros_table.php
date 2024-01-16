@@ -19,8 +19,10 @@ class CreateMaestrosTable extends Migration
             $table->string('nombre');
             $table->string('apellido');
             $table->string('foto');
-            $table->string('correo');
+            $table->string('correo')->unique();
+            $table->foreign('correo')->references('email')->on('users');
             $table->string('telefono');
+            $table->softDeletes();
         });
     }
 

@@ -20,6 +20,7 @@ class CreateTutoresTable extends Migration
             $table->string('apellido');
             $table->string('correo');
             $table->string('telefono');
+            $table->softDeletes();
         });
     }
 

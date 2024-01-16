@@ -17,6 +17,7 @@ class CreateCiclosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('ciclo');
+            $table->softDeletes();
         });
     }
 

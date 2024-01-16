@@ -19,9 +19,11 @@ class CreateAsistenciasTable extends Migration
             $table->boolean('status');
             $table->unsignedBigInteger('id_alumno');
             $table->foreign('id_alumno')->references('id')->on('alumnos');
-            $table->unsignedBigInteger('id_fecha');
-            $table->foreign('id_fecha')->references('id')->on('dias');
-
+            $table->date('fecha');
+            $table->unsignedBigInteger('id_trimestre');
+            $table->foreign('id_trimestre')->references('id')->on('trimestres');
+            
+            $table->softDeletes();
         });
     }
 

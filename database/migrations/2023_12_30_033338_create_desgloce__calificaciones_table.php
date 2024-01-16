@@ -24,8 +24,9 @@ class CreateDesgloceCalificacionesTable extends Migration
             $table->foreign('id_trimestre')->references('id')->on('trimestres');
             $table->integer('actividades');
             $table->integer('proyecto');
-            $table->integer('desempeño');
+            $table->integer('desempeno');
             $table->integer('total');
+            $table->softDeletes();
         });
     }
 

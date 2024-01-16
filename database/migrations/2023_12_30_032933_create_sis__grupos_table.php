@@ -19,6 +19,7 @@ class CreateSisGruposTable extends Migration
             $table->string('grupo');
             $table->unsignedBigInteger('id_ciclo');
             $table->foreign('id_ciclo')->references('id')->on('ciclos');
+            $table->softDeletes();
         });
     }
 

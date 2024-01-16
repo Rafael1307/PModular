@@ -22,7 +22,8 @@ class CreateCalificacionesTable extends Migration
             $table->foreign('id_materia')->references('id')->on('materias');
             $table->unsignedBigInteger('id_trimestre');
             $table->foreign('id_trimestre')->references('id')->on('trimestres');
-            $table->integer('calificaciones');
+            $table->integer('calificacion');
+            $table->softDeletes();
         });
     }
 

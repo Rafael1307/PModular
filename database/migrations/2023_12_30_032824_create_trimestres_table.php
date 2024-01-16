@@ -19,6 +19,7 @@ class CreateTrimestresTable extends Migration
             $table->string('trimestre');
             $table->unsignedBigInteger('id_ciclo');
             $table->foreign('id_ciclo')->references('id')->on('ciclos');
+            $table->softDeletes();
         });
     }
 

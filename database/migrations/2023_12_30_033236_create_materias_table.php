@@ -19,8 +19,9 @@ class CreateMateriasTable extends Migration
             $table->string('materia');
             $table->unsignedBigInteger('id_grupo');
             $table->foreign('id_grupo')->references('id')->on('grupos');
-            $table->unsignedBigInteger('id_sis');
-            $table->foreign('id_sis')->references('id')->on('sis__grupos');
+            $table->unsignedBigInteger('id_maestro');
+            $table->foreign('id_maestro')->references('id')->on('maestros');
+            $table->softDeletes();
         });
     }
 
