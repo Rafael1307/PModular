@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChooseRoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 use App\Http\Controllers\CalificacionesController;
 
 Route::resource('/calificaciones', CalificacionesController::class);
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/choose-role', [ChooseRoleController::class, 'show']);
+    Route::post('/choose-role', [ChooseRoleController::class, 'choose']);
+});
