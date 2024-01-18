@@ -17,6 +17,9 @@ use App\Http\Controllers\ChooseRoleController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/adlr', function () {
+    return view('welcomeadlr');
+});
 
 Auth::routes();
 
