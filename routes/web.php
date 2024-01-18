@@ -23,13 +23,30 @@ Route::get('/adlr', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 use App\Http\Controllers\CalificacionesController;
+use App\Http\Controllers\MaestrosController;
+use App\Http\Controllers\AlumnosController;
+use App\Http\Controllers\TutoresController;
 
 Route::resource('/calificaciones', CalificacionesController::class);
+
+Route::resource('/maestros', MaestrosController::class)->middleware('auth');
+
+
+// Rutas para Alumnos
+Route::resource('/alumnos', AlumnosController::class)->middleware('auth');
+
+
+// Rutas para Tutores
+Route::resource('/tutores', TutoresController::class)->middleware('auth');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/choose-role', [ChooseRoleController::class, 'show']);
     Route::post('/choose-role', [ChooseRoleController::class, 'choose']);
+
+
+ 
 });

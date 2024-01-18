@@ -80,6 +80,7 @@ class TutoresController extends Controller
      */
     public function destroy(Tutores $tutores)
     {
-        //
+        $tutores->delete();
+        return redirect()->route('maestros.index')->with('success', 'Maestro eliminado exitosamente');
     }
 }
