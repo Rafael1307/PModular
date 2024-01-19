@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChooseRoleController;
 
@@ -23,7 +24,9 @@ Route::get('/adlr', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth','verified')->name('home');
 
 use App\Http\Controllers\CalificacionesController;
 use App\Http\Controllers\MaestrosController;
@@ -32,15 +35,15 @@ use App\Http\Controllers\TutoresController;
 
 Route::resource('/calificaciones', CalificacionesController::class);
 
-Route::resource('/maestros', MaestrosController::class)->middleware('auth');
+Route::resource('/maestros', MaestrosController::class)->middleware(['auth','verified']);
 
 
 // Rutas para Alumnos
-Route::resource('/alumnos', AlumnosController::class)->middleware('auth');
+Route::resource('/alumnos', AlumnosController::class)->middleware(['auth','verified']);
 
 
 // Rutas para Tutores
-Route::resource('/tutores', TutoresController::class)->middleware('auth');
+Route::resource('/tutores', TutoresController::class)->middleware(['auth','verified']);
 
 
 Route::middleware(['auth'])->group(function () {
