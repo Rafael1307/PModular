@@ -14,7 +14,8 @@ class CiclosController extends Controller
      */
     public function index()
     {
-        //
+        $ciclos = Ciclos::paginate();
+        return view('ciclos.index', compact('ciclos'));
     }
 
     /**
@@ -24,7 +25,7 @@ class CiclosController extends Controller
      */
     public function create()
     {
-        //
+        return view('ciclos.create');
     }
 
     /**
@@ -35,7 +36,16 @@ class CiclosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ciclo' => 'required|unique:ciclos',
+        ]);
+
+        Ciclos::create([
+            'ciclo' => $request->input('ciclo'),
+        ]);
+
+        return redirect()->route('ciclos.index')->with('success', 'Ciclo creado exitosamente.');
+    
     }
 
     /**
@@ -44,9 +54,9 @@ class CiclosController extends Controller
      * @param  \App\Models\Ciclos  $ciclos
      * @return \Illuminate\Http\Response
      */
-    public function show(Ciclos $ciclos)
+    public function show(Ciclos $ciclo)
     {
-        //
+        return view('ciclos.show', compact('ciclo'));
     }
 
     /**
@@ -55,9 +65,9 @@ class CiclosController extends Controller
      * @param  \App\Models\Ciclos  $ciclos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Ciclos $ciclos)
+    public function edit(Ciclos $ciclo)
     {
-        //
+        return view('ciclos.edit', compact('ciclo'));
     }
 
     /**
@@ -67,9 +77,18 @@ class CiclosController extends Controller
      * @param  \App\Models\Ciclos  $ciclos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Ciclos $ciclos)
+    public function update(Request $request, Ciclos $ciclo)
     {
-        //
+        $request->validate([
+            'ciclo' => 'required',
+        ]);
+
+        $ciclo->update([
+            'ciclo' => $request->input('ciclo'),
+        ]);
+
+        return redirect()->route('ciclos.index')->with('success', 'Ciclo actualizado exitosamente.');
+  
     }
 
     /**
@@ -78,8 +97,12 @@ class CiclosController extends Controller
      * @param  \App\Models\Ciclos  $ciclos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ciclos $ciclos)
+    public function destroy($id)
     {
-        //
+        $ciclo = Ciclos::find($id);
+        $ciclo->delete();
+
+        return redirect()->route('ciclos.index')->with('success', 'Ciclo eliminado exitosamente.');
+    
     }
 }

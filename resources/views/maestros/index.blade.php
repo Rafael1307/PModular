@@ -40,7 +40,7 @@
                                         <a class="btn btn-primary" href="{{ route('maestros.edit',$maestro->id) }}">Editar</a>
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-primary"> Borrar</button>
+                                        <button type="submit" class="btn btn-primary"  onclick="return confirm('¿Estás seguro?')"> Borrar</button>
                                     </form>
 
 

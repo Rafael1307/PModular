@@ -32,6 +32,7 @@ use App\Http\Controllers\CalificacionesController;
 use App\Http\Controllers\MaestrosController;
 use App\Http\Controllers\AlumnosController;
 use App\Http\Controllers\TutoresController;
+use App\Http\Controllers\CiclosController;
 
 Route::resource('/calificaciones', CalificacionesController::class);
 
@@ -44,6 +45,9 @@ Route::resource('/alumnos', AlumnosController::class)->middleware(['auth','verif
 
 // Rutas para Tutores
 Route::resource('/tutores', TutoresController::class)->middleware(['auth','verified']);
+
+// Rutas para Ciclos
+Route::resource('/ciclos', CiclosController::class)->middleware(['auth','verified']);
 
 
 Route::middleware(['auth'])->group(function () {

@@ -2,12 +2,18 @@
 
 @section('content')
     <div class="container">
+        
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Panel de Administración</div>
 
                     <div class="card-body">
+
+                        <h4>Administrar Ciclos</h4>
+                        <a href="{{ route('ciclos.index') }}">Ver Ciclos</a>
+
+                        <hr>
                         <h4>Administrar Alumnos</h4>
                         <a href="{{ route('alumnos.index') }}">Ver Alumnos</a>
 
