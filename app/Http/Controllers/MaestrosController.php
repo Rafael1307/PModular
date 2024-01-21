@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Maestros;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 class MaestrosController extends Controller
 {
@@ -15,7 +16,7 @@ class MaestrosController extends Controller
      */
     public function index()
     {
-        $maestros = Maestros::all();
+        $maestros = Maestros::paginate();
         return view('maestros.index', compact('maestros'));
     }
 
@@ -26,7 +27,9 @@ class MaestrosController extends Controller
      */
     public function create()
     {
-        return view('maestros.create');
+
+        $usuariosConRolUno = User::where('rol', 1)->get(['id', 'email']);
+        return view('maestros.create', compact('usuariosConRolUno'));
     }
 
     /**
@@ -41,9 +44,20 @@ class MaestrosController extends Controller
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'telefono' => 'required|string|max:15',
+            'telefono' => 'required|numeric|max:10',
             'correo' => 'required|email|unique:maestros',
             // Otros campos que puedas tener
+        ],[
+            'nombre.required' => 'El campo nombre es obligatorio.',
+            'apellido.required' => 'El campo apellido es obligatorio.',
+            'telefono.required' => 'El campo telefono es obligatorio.',
+            'correo.required' => 'El campo correo es obligatorio.',
+            'nombre.max' => 'El campo nombre no puede tener más de :max caracteres.',
+            'apellido.max' => 'El campo apellido no puede tener más de :max caracteres.',
+            'telefono.max' => 'El campo telefono no puede tener más de :max caracteres.',
+            'foto.max' => 'El campo nombre no puede medir más de :max .',
+            'foto.mimes' => 'El formato del archivo no es valido.',
+            
         ]);
     
         // Subir foto si se proporciona
@@ -72,9 +86,14 @@ class MaestrosController extends Controller
      * @param  \App\Models\Maestros  $maestros
      * @return \Illuminate\Http\Response
      */
-    public function show(Maestros $maestros)
+    public function show($id)
     {
-        //
+       
+        $maestros = Maestros::find($id);
+        //$maestros->load('materias');
+
+        // Enviar los datos del maestro a la vista show.blade.php
+        return view('maestros.show', compact('maestros'));
     }
 
     /**
@@ -83,9 +102,12 @@ class MaestrosController extends Controller
      * @param  \App\Models\Maestros  $maestros
      * @return \Illuminate\Http\Response
      */
-    public function edit(Maestros $maestros)
+    public function edit(Maestros $maestro)
     {
-        return view('maestros.edit', compact('maestro'));
+
+        $usuariosConRolUno = User::where('rol', 1)->get(['id', 'email']);
+        
+        return view('maestros.edit', compact(['maestro','usuariosConRolUno']));
     }
 
     /**
@@ -95,17 +117,30 @@ class MaestrosController extends Controller
      * @param  \App\Models\Maestros  $maestros
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Maestros $maestros)
+    public function update(Request $request, $maestro)
     {
+
+        $maestros = Maestros::find($maestro);
+
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
             'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'telefono' => 'required|string|max:15',
-            'correo' => 'required|email|unique:maestros,correo,' . $maestros->id,
+            'telefono' => 'required|numeric|max:10',
+            'correo' => 'required|email|unique:maestros',
             // Otros campos que puedas tener
+        ],[
+            'nombre.required' => 'El campo nombre es obligatorio.',
+            'apellido.required' => 'El campo apellido es obligatorio.',
+            'telefono.required' => 'El campo telefono es obligatorio.',
+            'correo.required' => 'El campo correo es obligatorio.',
+            'nombre.max' => 'El campo nombre no puede tener más de :max caracteres.',
+            'apellido.max' => 'El campo apellido no puede tener más de :max caracteres.',
+            'telefono.max' => 'El campo telefono no puede tener más de :max caracteres.',
+            'foto.max' => 'El campo nombre no puede medir más de :max .',
+            'foto.mimes' => 'El formato del archivo no es valido.',
+            
         ]);
-    
         // Subir foto si se proporciona
         if ($request->hasFile('foto')) {
             $fotoPath = $request->file('foto')->store('uploads', 'public');
@@ -127,6 +162,8 @@ class MaestrosController extends Controller
             // Otros campos que puedas tener
         ]);
 
+
+
         return redirect()->route('maestros.index')->with('success', 'Maestro actualizado exitosamente');
     }
 
@@ -136,8 +173,10 @@ class MaestrosController extends Controller
      * @param  \App\Models\Maestros  $maestros
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Maestros $maestros)
+    public function destroy( $id)
     {
+
+        $maestros = Maestros::find($id);
         Storage::disk('public')->delete($maestros->foto);
         $maestros->delete();
         return redirect()->route('maestros.index')->with('success', 'Maestro eliminado exitosamente');

@@ -11,6 +11,7 @@ class Maestros extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['nombre', 'apellido', 'foto', 'telefono', 'correo'];
     
     public function user()
     {
@@ -20,6 +21,11 @@ class Maestros extends Model
     public function grupos()
     {
         return $this->hasMany(Grupos::class, 'id_asesor');
+    }
+
+    public function materias()
+    {
+        return $this->hasMany(Materias::class, 'id_maestro');
     }
 
 }
