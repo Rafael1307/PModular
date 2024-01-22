@@ -11,6 +11,8 @@ class Trimestres extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['trimestre', 'id_ciclo'];
+
     public function ciclo()
     {
         return $this->belongsTo(Ciclos::class, 'id_ciclo');

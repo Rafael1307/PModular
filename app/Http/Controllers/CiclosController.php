@@ -56,6 +56,7 @@ class CiclosController extends Controller
      */
     public function show(Ciclos $ciclo)
     {
+        
         return view('ciclos.show', compact('ciclo'));
     }
 

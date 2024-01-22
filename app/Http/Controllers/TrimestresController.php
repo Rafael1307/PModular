@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Trimestres;
 use Illuminate\Http\Request;
+use App\Models\Ciclos;
 
 class TrimestresController extends Controller
 {
@@ -12,9 +13,10 @@ class TrimestresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_ciclo)
     {
-        //
+        $ciclo = Ciclos::findOrFail($id_ciclo);
+        return view('ciclos.show', compact('ciclo'));
     }
 
     /**
@@ -22,11 +24,18 @@ class TrimestresController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    
 
+  
+
+
+    public function create($id_ciclo)
+    {
+        // Obtener el ciclo actual
+        $ciclo = Ciclos::findOrFail($id_ciclo);
+
+        return view('trimestres.create', compact('ciclo'));
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -35,7 +44,20 @@ class TrimestresController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'trimestre' => 'required',
+        ]);
+
+        Trimestres::create([
+            'trimestre' => $request->input('trimestre'),
+            'id_ciclo' => $request->input('id_ciclo'),
+        ]);
+
+        $id_ciclo = $request->input('id_ciclo');
+        
+
+        return redirect()->route('trimestres.index',[$id_ciclo])->with('success', 'Trimestre creado exitosamente.');
+   
     }
 
     /**
@@ -44,9 +66,9 @@ class TrimestresController extends Controller
      * @param  \App\Models\Trimestres  $trimestres
      * @return \Illuminate\Http\Response
      */
-    public function show(Trimestres $trimestres)
+    public function show(Trimestres $trimestre)
     {
-        //
+        return view('trimestres.show', compact('trimestre'));
     }
 
     /**
@@ -55,9 +77,9 @@ class TrimestresController extends Controller
      * @param  \App\Models\Trimestres  $trimestres
      * @return \Illuminate\Http\Response
      */
-    public function edit(Trimestres $trimestres)
+    public function edit(Trimestres $trimestre)
     {
-        //
+        return view('trimestres.edit', compact('trimestre'));
     }
 
     /**
@@ -67,9 +89,20 @@ class TrimestresController extends Controller
      * @param  \App\Models\Trimestres  $trimestres
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Trimestres $trimestres)
+    public function update(Request $request, Trimestres $trimestre)
     {
-        //
+        $request->validate([
+            'trimestre' => 'required',
+        ]);
+
+        $trimestre->update([
+            'trimestre' => $request->input('trimestre'),
+        ]);
+
+        $id_ciclo = $trimestre->id_ciclo;
+        
+        return redirect()->route('trimestres.index',[$id_ciclo])->with('success', 'Trimestre actualizado exitosamente.');
+  
     }
 
     /**
@@ -78,8 +111,14 @@ class TrimestresController extends Controller
      * @param  \App\Models\Trimestres  $trimestres
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Trimestres $trimestres)
+    public function destroy(Trimestres $trimestre)
     {
-        //
+        $id_ciclo = $trimestre->id_ciclo;
+
+        $trimestre->delete();
+        
+
+        return redirect()->route('trimestres.index',[$id_ciclo])->with('success', 'Trimestre eliminado exitosamente.');
+    
     }
 }
