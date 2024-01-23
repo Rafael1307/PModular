@@ -3,9 +3,7 @@
 @section('content')
     <div class="container">
         <h1>Detalles del Ciclo</h1>
-
-        <p>ID: {{ $ciclo->id }}</p>
-        <p>Ciclo: {{ $ciclo->ciclo }}</p>
+        <h2>Ciclo: {{ $ciclo->ciclo }}</h2>
 
         <h2>Trimestres Asociados:</h2>
         <a href="{{ route('trimestres.create', ['id_ciclo' => $ciclo->id]) }}" class="btn btn-primary">Crear Trimestre</a>
@@ -41,17 +39,44 @@
             </ul>
         @endif
         <h2>Grupos Asociados:</h2>
-        <a href="{{ route('ciclos.create') }}" class="btn btn-primary">Crear Grupo</a>
+        <a href="{{ route('grupos.create', ['id_ciclo' => $ciclo->id]) }}" class="btn btn-primary">Crear Grupo</a>
 
         @if ($ciclo->grupos->isEmpty())
             <p>No hay grupos asociados a este ciclo.</p>
         @else
             <ul>
-                @foreach ($ciclo->grupos as $grupo)
-                    <li>{{ $grupo->grupo }}</li>
-                    <a href="{{ route('ciclos.show', $ciclo->id) }}" class="btn btn-info">Ver</a>
-                    <!-- Puedes mostrar más detalles de cada grupo si es necesario -->
-                @endforeach
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Grupo</th>
+                            <th>Grado</th>
+                            <th>Turno</th>
+                            <th>Asesor</th>
+                            <th>Ciclo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($ciclo->grupos as $grupo)
+                            <tr>
+                                <td>{{ $grupo->grupo }}</td>
+                                <td>{{ $grupo->grado }}</td>
+                                <td>{{ $grupo->turno }}</td>
+                                <td>{{ $grupo->asesor->nombre }} {{ $grupo->asesor->apellido }}</td>
+                                <td>{{ $grupo->ciclo->ciclo }}</td>
+                                <td>
+                                    <a href="{{ route('grupos.show', $grupo->id) }}" class="btn btn-info">Ver</a>
+                                    <a href="{{ route('grupos.edit', $grupo->id) }}" class="btn btn-warning">Editar</a>
+                                    <form action="{{ route('grupos.destroy', $grupo->id) }}" method="post" style="display: inline-block;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </ul>
         @endif
 

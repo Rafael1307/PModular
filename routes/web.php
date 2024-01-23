@@ -34,6 +34,8 @@ use App\Http\Controllers\AlumnosController;
 use App\Http\Controllers\TutoresController;
 use App\Http\Controllers\CiclosController;
 use App\Http\Controllers\TrimestresController;
+use App\Http\Controllers\GruposController;
+use App\Http\Controllers\SisGruposController;
 
 Route::resource('/calificaciones', CalificacionesController::class);
 
@@ -59,6 +61,15 @@ Route::get('/trimestres/{trimestre}/edit', [TrimestresController::class, 'edit']
 Route::put('/trimestres/{trimestre}', [TrimestresController::class, 'update'])->name('trimestres.update')->middleware(['auth','verified']);
 Route::delete('/trimestres/{trimestre}', [TrimestresController::class, 'destroy'])->name('trimestres.destroy')->middleware(['auth','verified']);
 
+
+// Rutas para Grupos de sistema
+Route::get('/sisgrupos/create/{id_ciclo}', [SisGruposController::class, 'create'])->name('sis_grupos.create')->middleware(['auth','verified']);
+Route::get('/sisgrupos/¨{id_ciclo}', [SisGruposController::class, 'index'])->name('sis_grupos.index')->middleware(['auth','verified']);
+Route::post('/sisgrupos/store', [SisGruposController::class, 'store'])->name('sis_grupos.store')->middleware(['auth','verified']);
+Route::get('/sisgrupos/{grupo}', [SisGruposController::class, 'show'])->name('sis_grupos.show')->middleware(['auth','verified']);
+Route::get('/sisgrupos/{grupo}/edit', [SisGruposController::class, 'edit'])->name('sis_grupos.edit')->middleware(['auth','verified']);
+Route::put('/sisgrupos/{grupo}', [SisGruposController::class, 'update'])->name('sis_grupos.update')->middleware(['auth','verified']);
+Route::delete('/sisgrupos/{grupo}', [SisGruposController::class, 'destroy'])->name('sis_grupos.destroy')->middleware(['auth','verified']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/choose-role', [ChooseRoleController::class, 'show']);

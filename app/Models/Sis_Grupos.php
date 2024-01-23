@@ -11,6 +11,9 @@ class Sis_Grupos extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['grupo', 'id_ciclo'];
+
+    // Relación con ciclo (muchos a uno)
     public function ciclo()
     {
         return $this->belongsTo(Ciclos::class, 'id_ciclo');

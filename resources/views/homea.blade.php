@@ -11,21 +11,21 @@
                     <div class="card-body">
 
                         <h4>Administrar Ciclos</h4>
-                        <a href="{{ route('ciclos.index') }}">Ver Ciclos</a>
+                        <a href="{{ route('ciclos.index') }}" class="btn btn-primary">Ver Ciclos</a>
 
                         <hr>
                         <h4>Administrar Alumnos</h4>
-                        <a href="{{ route('alumnos.index') }}">Ver Alumnos</a>
+                        <a href="{{ route('alumnos.index') }}" class="btn btn-primary">Ver Alumnos</a>
 
                         <hr>
 
                         <h4>Administrar Maestros</h4>
-                        <a href="{{ route('maestros.index') }}">Ver Maestros</a>
+                        <a href="{{ route('maestros.index') }}" class="btn btn-primary">Ver Maestros</a>
 
                         <hr>
 
                         <h4>Administrar Tutores</h4>
-                        <a href="{{ route('tutores.index') }}">Ver Tutores</a>
+                        <a href="{{ route('tutores.index') }}" class="btn btn-primary">Ver Tutores</a>
                     </div>
                 </div>
             </div>

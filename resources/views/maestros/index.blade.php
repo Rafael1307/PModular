@@ -55,9 +55,6 @@
             @endforeach
         </div>
 
-        <!-- Paginación si es necesario -->
-        <div class="d-flex justify-content-center mt-4">
-            {{ $maestros->links() }}
-        </div>
+        <a href="{{ url('/home')}}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

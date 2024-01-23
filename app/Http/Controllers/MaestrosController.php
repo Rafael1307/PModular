@@ -40,26 +40,15 @@ class MaestrosController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'telefono' => 'required|numeric|max:10',
-            'correo' => 'required|email|unique:maestros',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:4096',
+            'telefono' => 'required|string|max:15',
             // Otros campos que puedas tener
-        ],[
-            'nombre.required' => 'El campo nombre es obligatorio.',
-            'apellido.required' => 'El campo apellido es obligatorio.',
-            'telefono.required' => 'El campo telefono es obligatorio.',
-            'correo.required' => 'El campo correo es obligatorio.',
-            'nombre.max' => 'El campo nombre no puede tener más de :max caracteres.',
-            'apellido.max' => 'El campo apellido no puede tener más de :max caracteres.',
-            'telefono.max' => 'El campo telefono no puede tener más de :max caracteres.',
-            'foto.max' => 'El campo nombre no puede medir más de :max .',
-            'foto.mimes' => 'El formato del archivo no es valido.',
             
         ]);
-    
         // Subir foto si se proporciona
         if ($request->hasFile('foto')) {
             $fotoPath = $request->file('foto')->store('uploads', 'public');

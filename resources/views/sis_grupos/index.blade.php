@@ -2,10 +2,9 @@
 
 @section('content')
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h1>Listado de Ciclos</h1>
-            <a href="{{ route('ciclos.create') }}" class="btn btn-primary">Crear Ciclo</a>
-        </div>
+        <h1>Listado de Ciclos</h1>
+
+        <a href="{{ route('ciclos.create') }}" class="btn btn-primary">Crear Ciclo</a>
 
         <table class="table">
             <thead>
@@ -31,6 +30,6 @@
                 @endforeach
             </tbody>
         </table>
-        <a href="{{ url('/home')}}" class="btn btn-primary">Volver</a>
+        <a href="{{ route('ciclos.index') }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

@@ -11,13 +11,23 @@ class Grupos extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function maestro()
+    protected $fillable = ['grupo', 'grado', 'turno', 'id_asesor', 'id_ciclo'];
+
+    // Relación con maestro (muchos a uno)
+    public function asesor()
     {
         return $this->belongsTo(Maestros::class, 'id_asesor');
     }
 
-    public function materias()
+    // Relación con ciclo (muchos a uno)
+    public function ciclo()
     {
-        return $this->hasMany(Materias::class, 'id_grupo');
+        return $this->belongsTo(Ciclos::class, 'id_ciclo');
+    }
+
+    // Relación con alumnos (uno a muchos)
+    public function alumnos()
+    {
+        return $this->hasMany(Alumnos::class, 'id_grupo');
     }
 }
