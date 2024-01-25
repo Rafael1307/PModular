@@ -19,6 +19,5 @@
 
             <button type="submit" class="btn btn-primary">Guardar Trimestre</button>
         </form>
-        <a href="{{ route('ciclos.index') }}" class="btn btn-primary">Volver</a>
-    </div>
+        <a href="{{ route('trimestres.index', $ciclo->id) }}" class="btn btn-primary">Volver</a>    </div>
 @endsection

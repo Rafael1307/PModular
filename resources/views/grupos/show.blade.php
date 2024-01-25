@@ -22,6 +22,6 @@
             </ul>
         @endif
 
-        <a href="{{ route('grupos.index') }}" class="btn btn-primary">Volver</a>
+        <a href="{{ route('grupos.index', $grupo->id_ciclo) }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

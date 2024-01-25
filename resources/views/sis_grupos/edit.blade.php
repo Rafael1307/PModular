@@ -19,6 +19,7 @@
 
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         </form>
+        <a href="{{ route('sis_grupos.index', $sisGrupo->id_ciclo) }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection
 

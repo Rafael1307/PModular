@@ -21,5 +21,6 @@
 
             <button type="submit" class="btn btn-primary">Guardar Grupo del Sistema</button>
         </form>
+        <a href="{{ route('sis_grupos.index', $ciclo->id) }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

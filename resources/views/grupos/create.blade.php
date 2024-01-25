@@ -40,5 +40,7 @@
 
             <button type="submit" class="btn btn-primary">Guardar Grupo</button>
         </form>
+        <a href="{{ route('grupos.index', $ciclo->id) }}" class="btn btn-primary">Volver</a>
+
     </div>
 @endsection

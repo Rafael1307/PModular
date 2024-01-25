@@ -7,6 +7,6 @@
         <p>ID: {{ $trimestre->id }}</p>
         <p>Trimestre: {{ $trimestre->trimestre }}</p>
 
-        <a href="{{ route('ciclos.index') }}" class="btn btn-primary">Volver</a>
+        <a href="{{ route('trimestres.index', $trimestre->id_ciclo) }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

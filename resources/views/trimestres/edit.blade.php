@@ -15,6 +15,7 @@
 
             <button type="submit" class="btn btn-primary">Actualizar Trimestre</button>
         </form>
+        <a href="{{ route('trimestres.index', $trimestre->id_ciclo) }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection
 

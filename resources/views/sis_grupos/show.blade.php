@@ -21,6 +21,6 @@
             </ul>
         @endif
 
-        <a href="{{ route('sis_grupos.index') }}" class="btn btn-primary">Volver</a>
+        <a href="{{ route('sis_grupos.index', $sisGrupo->id_ciclo) }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection
