@@ -11,6 +11,9 @@ class Sis_Grupos extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $guarded = [];
+    protected $table = 'sis_grupos';
+
     protected $fillable = ['grupo', 'id_ciclo'];
 
     // Relación con ciclo (muchos a uno)

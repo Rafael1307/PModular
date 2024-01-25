@@ -1,19 +1,23 @@
+
 @extends('layouts.app')
 
 @section('content')
     <div class="container">
-        <h1>Editar Trimestre</h1>
+        <h1>Editar Grupo</h1>
 
-        <form action="{{ route('trimestres.update', $trimestre->id) }}" method="post">
+        <form action="{{ route('sis_grupos.update', $sisGrupo->id) }}" method="post">
             @csrf
-            @method('PUT')
+            @method('put')
 
             <div class="form-group">
-                <label for="trimestre">Trimestre:</label>
-                <input type="text" name="trimestre" class="form-control" value="{{ $trimestre->trimestre }}" required>
+                <label for="grupo">Grupo:</label>
+                <input type="text" name="grupo" class="form-control" value="{{ $sisGrupo->grupo }}" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Actualizar Trimestre</button>
+
+            <!-- Resto del formulario -->
+
+            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         </form>
     </div>
 @endsection

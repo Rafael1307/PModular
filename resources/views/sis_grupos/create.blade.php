@@ -2,23 +2,24 @@
 
 @section('content')
     <div class="container">
-        <h1>Crear Trimestre para el Ciclo: {{ $ciclo->ciclo }}</h1>
+        <h1>Crear Grupo del Sistema</h1>
 
-        <form action="{{ route('trimestres.store') }}" method="post">
+        <form action="{{ route('sis_grupos.store') }}" method="post">
             @csrf
-
-            <!-- Agrega un campo oculto para enviar el id_ciclo -->
             <input type="hidden" name="id_ciclo" value="{{ $ciclo->id }}">
+            <div class="form-group">
+                <label for="grupo">Grupo:</label>
+                <input type="text" name="grupo" class="form-control" required>
+            </div>
 
             <div class="form-group">
-                <label for="trimestre">Trimestre:</label>
-                <input type="text" name="trimestre" class="form-control" required>
+                <label for="id_ciclo">Ciclo:</label>
+                <p> {{ $ciclo->ciclo }} </p>
             </div>
 
             <!-- Resto del formulario -->
 
-            <button type="submit" class="btn btn-primary">Guardar Trimestre</button>
+            <button type="submit" class="btn btn-primary">Guardar Grupo del Sistema</button>
         </form>
-        <a href="{{ route('ciclos.index') }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

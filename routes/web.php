@@ -62,14 +62,23 @@ Route::put('/trimestres/{trimestre}', [TrimestresController::class, 'update'])->
 Route::delete('/trimestres/{trimestre}', [TrimestresController::class, 'destroy'])->name('trimestres.destroy')->middleware(['auth','verified']);
 
 
+
+Route::get('/grupos/create/{id_ciclo}', [GruposController::class, 'create'])->name('grupos.create')->middleware(['auth','verified']);
+Route::get('/grupos/¨{id_ciclo}', [GruposController::class, 'index'])->name('grupos.index')->middleware(['auth','verified']);
+Route::post('/grupos/store', [GruposController::class, 'store'])->name('grupos.store')->middleware(['auth','verified']);
+Route::get('/grupos/{grupo}', [GruposController::class, 'show'])->name('grupos.show')->middleware(['auth','verified']);
+Route::get('/grupos/{grupo}/edit', [GruposController::class, 'edit'])->name('grupos.edit')->middleware(['auth','verified']);
+Route::put('/grupos/{grupo}', [GruposController::class, 'update'])->name('grupos.update')->middleware(['auth','verified']);
+Route::delete('/grupos/{grupo}', [GruposController::class, 'destroy'])->name('grupos.destroy')->middleware(['auth','verified']);
+
 // Rutas para Grupos de sistema
 Route::get('/sisgrupos/create/{id_ciclo}', [SisGruposController::class, 'create'])->name('sis_grupos.create')->middleware(['auth','verified']);
 Route::get('/sisgrupos/¨{id_ciclo}', [SisGruposController::class, 'index'])->name('sis_grupos.index')->middleware(['auth','verified']);
 Route::post('/sisgrupos/store', [SisGruposController::class, 'store'])->name('sis_grupos.store')->middleware(['auth','verified']);
-Route::get('/sisgrupos/{grupo}', [SisGruposController::class, 'show'])->name('sis_grupos.show')->middleware(['auth','verified']);
-Route::get('/sisgrupos/{grupo}/edit', [SisGruposController::class, 'edit'])->name('sis_grupos.edit')->middleware(['auth','verified']);
-Route::put('/sisgrupos/{grupo}', [SisGruposController::class, 'update'])->name('sis_grupos.update')->middleware(['auth','verified']);
-Route::delete('/sisgrupos/{grupo}', [SisGruposController::class, 'destroy'])->name('sis_grupos.destroy')->middleware(['auth','verified']);
+Route::get('/sisgrupos/{sisGrupo}', [SisGruposController::class, 'show'])->name('sis_grupos.show')->middleware(['auth','verified']);
+Route::get('/sisgrupos/{sisGrupo}/edit', [SisGruposController::class, 'edit'])->name('sis_grupos.edit')->middleware(['auth','verified']);
+Route::put('/sisgrupos/{sisGrupo}', [SisGruposController::class, 'update'])->name('sis_grupos.update')->middleware(['auth','verified']);
+Route::delete('/sisgrupos/{sisGrupo}', [SisGruposController::class, 'destroy'])->name('sis_grupos.destroy')->middleware(['auth','verified']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/choose-role', [ChooseRoleController::class, 'show']);

@@ -23,7 +23,7 @@ class CreateAlumnosTable extends Migration
             $table->unsignedBigInteger('id_grupo');
             $table->foreign('id_grupo')->references('id')->on('grupos');
             $table->unsignedBigInteger('id_sis');
-            $table->foreign('id_sis')->references('id')->on('sis__grupos');
+            $table->foreign('id_sis')->references('id')->on('sis_grupos');
             $table->softDeletes();
 
         });

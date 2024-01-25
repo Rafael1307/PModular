@@ -2,11 +2,25 @@
 
 @section('content')
     <div class="container">
-        <h1>Detalles del Trimestre</h1>
+        <h1>Detalles del Grupo: {{ $sisGrupo->grupo }}</h1>
 
-        <p>ID: {{ $sis_grupo->id }}</p>
-        <p>Trimestre: {{ $sis_grupo->grupo }}</p>
+        <p>Grado: {{ $sisGrupo->grupo }}</p>
 
-        <a href="{{ route('ciclos.index') }}" class="btn btn-primary">Volver</a>
+        <!-- Agrega más detalles según sea necesario -->
+
+        <h2>Alumnos del Grupo:</h2>
+
+        @if ($sisGrupo->alumnos->isEmpty())
+            <p>No hay alumnos en este grupo.</p>
+        @else
+            <ul>
+                @foreach ($sisGrupo->alumnos as $alumno)
+                    <li>{{ $alumno->nombre }} {{ $alumno->apellido }}</li>
+                    <!-- Puedes mostrar más detalles de cada alumno si es necesario -->
+                @endforeach
+            </ul>
+        @endif
+
+        <a href="{{ route('sis_grupos.index') }}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

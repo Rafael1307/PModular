@@ -13,7 +13,7 @@ class CreateSisGruposTable extends Migration
      */
     public function up()
     {
-        Schema::create('sis__grupos', function (Blueprint $table) {
+        Schema::create('sis_grupos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->string('grupo');

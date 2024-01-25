@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Sis_Grupos;
 use Illuminate\Http\Request;
+use App\Models\Ciclos;
+use App\Models\Maestros;
+use App\Models\Alumnos;
 
 class SisGruposController extends Controller
 {
@@ -12,9 +15,10 @@ class SisGruposController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id_ciclo)
     {
-        //
+        $ciclo = Ciclos::findOrFail($id_ciclo);
+        return view('ciclos.show', compact('ciclo'));
     }
 
     /**
@@ -22,9 +26,14 @@ class SisGruposController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id_ciclo)
     {
-        //
+
+        
+        $ciclo = Ciclos::findOrFail($id_ciclo);
+
+        $maestros = Maestros::all();
+        return view('sis_grupos.create', compact(['ciclo', 'maestros']));
     }
 
     /**
@@ -35,7 +44,16 @@ class SisGruposController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'grupo' => 'required|unique:sis_grupos',
+            'id_ciclo' => 'required',
+        ]);
+
+        Sis_Grupos::create($request->all());
+
+        $id_ciclo = $request->input('id_ciclo');
+
+        return redirect()->route('sis_grupos.index',[$id_ciclo])->with('success', 'Grupo del Sistema creado exitosamente.');
     }
 
     /**
@@ -44,9 +62,10 @@ class SisGruposController extends Controller
      * @param  \App\Models\Sis_Grupos  $sis_Grupos
      * @return \Illuminate\Http\Response
      */
-    public function show(Sis_Grupos $sis_Grupos)
+    public function show(Sis_Grupos $sisGrupo)
     {
-        //
+        $alumnos = Alumnos::where('id_grupo', $sisGrupo->id)->get();
+        return view('sis_grupos.show', compact('sisGrupo', 'alumnos'));
     }
 
     /**
@@ -55,9 +74,11 @@ class SisGruposController extends Controller
      * @param  \App\Models\Sis_Grupos  $sis_Grupos
      * @return \Illuminate\Http\Response
      */
-    public function edit(Sis_Grupos $sis_Grupos)
+    public function edit(Sis_Grupos $sisGrupo)
     {
-        //
+
+        $maestros = Maestros::all();
+        return view('sis_grupos.edit', compact(['sisGrupo', 'maestros']));
     }
 
     /**
@@ -67,9 +88,20 @@ class SisGruposController extends Controller
      * @param  \App\Models\Sis_Grupos  $sis_Grupos
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Sis_Grupos $sis_Grupos)
+    public function update(Request $request, Sis_Grupos $sisGrupo)
     {
-        //
+        $request->validate([
+            'grupo' => 'required',
+        ]);
+
+        $sisGrupo->update([
+            'grupo' => $request->input('grupo'),
+        ]);
+
+        $id_ciclo = $sisGrupo->id_ciclo;
+
+        return redirect()->route('sis_grupos.index',[$id_ciclo])->with('success', 'Grupo del Sistema actualizado exitosamente.');
+   
     }
 
     /**
@@ -78,8 +110,12 @@ class SisGruposController extends Controller
      * @param  \App\Models\Sis_Grupos  $sis_Grupos
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Sis_Grupos $sis_Grupos)
+    public function destroy(Sis_Grupos $sisGrupo)
     {
-        //
+
+        $id_ciclo = $sisGrupo->id_ciclo;
+        $sisGrupo->delete();
+
+        return redirect()->route('sis_grupos.index',[$id_ciclo])->with('success', 'Grupo del Sistema eliminado exitosamente.');
     }
 }
