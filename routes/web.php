@@ -47,7 +47,14 @@ Route::resource('/alumnos', AlumnosController::class)->middleware(['auth','verif
 
 
 // Rutas para Tutores
-Route::resource('/tutores', TutoresController::class)->middleware(['auth','verified']);
+Route::get('/tutores/create', [TutoresController::class, 'create'])->name('tutores.create')->middleware(['auth','verified']);
+Route::get('/tutores', [TutoresController::class, 'index'])->name('tutores.index')->middleware(['auth','verified']);
+Route::post('/tutores/store', [TutoresController::class, 'store'])->name('tutores.store')->middleware(['auth','verified']);
+Route::get('/tutores/{tutor}', [TutoresController::class, 'show'])->name('tutores.show')->middleware(['auth','verified']);
+Route::get('/tutores/{tutor}/edit', [TutoresController::class, 'edit'])->name('tutores.edit')->middleware(['auth','verified']);
+Route::put('/tutores/{tutor}', [TutoresController::class, 'update'])->name('tutores.update')->middleware(['auth','verified']);
+Route::delete('/tutores/{tutor}', [TutoresController::class, 'destroy'])->name('tutores.destroy')->middleware(['auth','verified']);
+
 
 // Rutas para Ciclos
 Route::resource('/ciclos', CiclosController::class)->middleware(['auth','verified']);

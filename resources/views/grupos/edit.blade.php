@@ -8,19 +8,25 @@
             @csrf
             @method('put')
 
-            <div class="form-group">
-                <label for="grupo">Grupo:</label>
-                <input type="text" name="grupo" class="form-control" value="{{ $grupo->grupo }}" required>
-            </div>
 
             <div class="form-group">
                 <label for="grado">Grado:</label>
                 <input type="text" name="grado" class="form-control" value="{{ $grupo->grado }}" required>
             </div>
+            
+            <div class="form-group">
+                <label for="grupo">Grupo:</label>
+                <input type="text" name="grupo" class="form-control" value="{{ $grupo->grupo }}" required>
+            </div>
+
+            
 
             <div class="form-group">
                 <label for="turno">Turno:</label>
-                <input type="text" name="turno" class="form-control" value="{{ $grupo->turno }}" required>
+                <select name="turno" class="form-control" required>
+                    <option value="matutino" {{ $grupo->turno === 'matutino' ? 'selected' : '' }}>Matutino</option>
+                    <option value="vespertino" {{ $grupo->turno === 'vespertino' ? 'selected' : '' }}>Vespertino</option>
+                </select>
             </div>
 
             <div class="form-group">

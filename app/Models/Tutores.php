@@ -11,8 +11,11 @@ class Tutores extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['nombre', 'apellido', 'correo', 'telefono'];
+
+
     public function alumnos()
     {
-        return $this->belongsToMany(Alumnos::class, 'alumnos_tutores', 'id_tutor', 'id_alumno');
+        return $this->belongsToMany(Alumnos::class, 'alumnos__tutores', 'id_tutor', 'id_alumno');
     }
 }
