@@ -45,5 +45,6 @@
                 <button type="submit" class="btn btn-primary">Crear Maestro</button>
             </div>
         </form>
+        <a href="{{ route('maestros.index') }}" class="btn btn-primary">Volver al Listado</a>
     </div>
 @endsection

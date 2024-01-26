@@ -32,5 +32,6 @@
                 @endif
             </div>
         </div>
+        <a href="{{ route('maestros.index') }}" class="btn btn-primary">Volver al Listado</a>
     </div>
 @endsection

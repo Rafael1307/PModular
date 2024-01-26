@@ -15,5 +15,6 @@
 
             <button type="submit" class="btn btn-primary">Actualizar Ciclo</button>
         </form>
+        <a href="{{ route('ciclos.index') }}" class="btn btn-primary">Volver al Listado</a>
     </div>
 @endsection

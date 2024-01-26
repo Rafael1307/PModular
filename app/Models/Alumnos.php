@@ -11,6 +11,8 @@ class Alumnos extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['nombre', 'apellido', 'correo', 'foto', 'id_grupo', 'id_sis'];
+
     public function grupo()
     {
         return $this->belongsTo(Grupos::class, 'id_grupo');
@@ -24,5 +26,10 @@ class Alumnos extends Model
     public function calificaciones()
     {
         return $this->hasMany(Calificaciones::class, 'id_alumno');
+    }
+    
+    public function tutores()
+    {
+        return $this->belongsToMany(Tutores::class, 'alumnos__tutores', 'id_alumno', 'id_tutor');
     }
 }
