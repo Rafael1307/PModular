@@ -26,6 +26,11 @@
 
                         <h4>Administrar Tutores</h4>
                         <a href="{{ route('tutores.index') }}" class="btn btn-primary">Ver Tutores</a>
+
+                        <hr>
+
+                        <h4>Administrar Materias</h4>
+                        <a href="{{ route('materias.index') }}" class="btn btn-primary">Ver Tutores</a>
                     </div>
                 </div>
             </div>

@@ -2,27 +2,22 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Panel de Administración</div>
+        <h1>Bienvenido, {{ Auth::user()->maestro->nombre }} {{ Auth::user()->maestro->apellido }}</h1>
 
-                    <div class="card-body">
-                        <h4>Administrar Alumnos</h4>
-                        <a href="{{ route('alumnos.index') }}">Ver Alumnos</a>
-
-                        <hr>
-
-                        <h4>Administrar Maestros</h4>
-                        <a href="{{ route('maestros.index') }}">Ver Maestros</a>
-
-                        <hr>
-
-                        <h4>Administrar Tutores</h4>
-                        <a href="{{ route('tutores.index') }}">Ver Tutores</a>
-                    </div>
-                </div>
+        @if(Auth::user()->rol == 1)
+            <div>
+                <h2>Mis Materias</h2>
+                <p>Aquí puedes ver las materias asignadas a ti como maestro.</p>
+                <a href="{{ url('/home')}}" class="btn btn-primary">Ver Mis Materias</a>
             </div>
-        </div>
+
+            <div>
+                <h2>Mis Grupos</h2>
+                <p>Aquí puedes ver los grupos a los que estás asignado como asesor.</p>
+                <a href="{{ url('/home')}}" class="btn btn-primary">Ver Mis Grupos</a>
+            </div>
+        @endif
+
+        {{-- Otros apartados según sea necesario --}}
     </div>
 @endsection

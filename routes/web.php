@@ -36,8 +36,13 @@ use App\Http\Controllers\CiclosController;
 use App\Http\Controllers\TrimestresController;
 use App\Http\Controllers\GruposController;
 use App\Http\Controllers\SisGruposController;
+use App\Http\Controllers\MateriasController;
 
-Route::resource('/calificaciones', CalificacionesController::class);
+
+Route::resource('/calificaciones', CalificacionesController::class)->middleware(['auth','verified']);
+
+Route::resource('materias', MateriasController::class)->middleware(['auth','verified']);
+
 
 Route::resource('/maestros', MaestrosController::class)->middleware(['auth','verified']);
 

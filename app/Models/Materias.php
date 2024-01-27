@@ -11,6 +11,8 @@ class Materias extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = ['materia', 'id_grupo', 'id_maestro'];
+
     public function calificaciones()
     {
         return $this->hasMany(Calificaciones::class, 'id_materia');

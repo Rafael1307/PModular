@@ -46,7 +46,7 @@ class AlumnosController extends Controller
             'nombre' => 'required',
             'apellido' => 'required',
             'correo' => 'required|email',
-            'foto' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'id_grupo' => 'required',
         ]);
 
