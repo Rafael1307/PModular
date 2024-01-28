@@ -6,6 +6,7 @@ use App\Models\Maestros;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Models\Materias;
 
 class MaestrosController extends Controller
 {
@@ -80,9 +81,11 @@ class MaestrosController extends Controller
        
         $maestros = Maestros::find($id);
         //$maestros->load('materias');
+        $materias = $maestros->materias;
+        $materiasList = $this->getMateriasList();
 
         // Enviar los datos del maestro a la vista show.blade.php
-        return view('maestros.show', compact('maestros'));
+        return view('maestros.show', compact('maestros', 'materias', 'materiasList'));
     }
 
     /**
@@ -169,5 +172,27 @@ class MaestrosController extends Controller
         Storage::disk('public')->delete($maestros->foto);
         $maestros->delete();
         return redirect()->route('maestros.index')->with('success', 'Maestro eliminado exitosamente');
+    }
+
+    private function getMateriasList()
+    {
+        return [
+            '11' => 'Español',
+            '12' => 'Ingles',
+            '13' => 'Artes',
+            '21' => 'Matematicas',
+            '22' => 'Biologia',
+            '23' => 'Fisica',
+            '24' => 'Quimica',
+            '31' => 'Geografia',
+            '32' => 'Historia',
+            '33' => 'Formacion Civica y Etica',
+            '41' => 'Tecnologia',
+            '42' => 'Educacion Fisica',
+            '43' => 'Socioemocional',
+            '51' => 'Creatividad',
+            '52' => 'Performance',
+            '53' => 'FRyS',
+        ];
     }
 }

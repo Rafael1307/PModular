@@ -20,16 +20,18 @@
                 <h4>Materias Asignadas</h4>
             </div>
             <div class="card-body">
-                @if ($maestros->materias->count() > 0)
-                    <ul>
-                        @foreach ($maestros->materias as $materia)
-                            <li>{{ $materia->nombre }}</li>
-                            <!-- Puedes mostrar más detalles de la materia si es necesario -->
-                        @endforeach
-                    </ul>
-                @else
-                    <p>Este maestro no tiene materias asignadas.</p>
-                @endif
+                @if ($materias->isEmpty())
+                <p>El maestro no está asignado a ninguna materia.</p>
+            @else
+                <ul>
+                    @foreach ($materias as $materia)
+                        <li>
+                            {{ $materiasList[$materia->materia] }}
+                            (Grupo: {{ $materia->grupo->grado}} {{ $materia->grupo->grupo?? 'No asignado a un grupo' }})
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
             </div>
         </div>
         <a href="{{ route('maestros.index') }}" class="btn btn-primary">Volver al Listado</a>
