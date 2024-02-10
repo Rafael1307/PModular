@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Desgloce_Calificaciones;
 use Illuminate\Http\Request;
+use App\Models\Materias;
+use App\Models\Ciclos;
+use App\Models\Trimestres;
 
 class DesgloceCalificacionesController extends Controller
 {
@@ -81,5 +84,72 @@ class DesgloceCalificacionesController extends Controller
     public function destroy(Desgloce_Calificaciones $desgloce_Calificaciones)
     {
         //
+    }
+
+
+    public function showEvaluarGrupo($materia_id)
+    {
+        $materia = Materias::findOrFail($materia_id);
+        $grupo = $materia->grupo;
+        $ciclo = $grupo->ciclo;
+        $trimestres = Trimestres::where('id_ciclo', $ciclo->id)->get();
+
+
+        return view('desgloce_calificaciones.evaluartrimestre', compact('materia', 'trimestres'));
+    }
+
+    public function showGrupo(Request $request, $materia_id){
+
+        $trimestre_id = $request->input('trimestre');
+        $materia = Materias::findOrFail($materia_id);
+        $grupo = $materia->grupo;
+        $alumnos2 = $grupo->alumnos;
+
+        foreach($alumnos2 as $alumno){
+            $this->buscaCrea($alumno, $materia_id, $trimestre_id);
+        }
+
+        $alumnos = $grupo->alumnos;
+
+        return view('desgloce_calificaciones.calificartrimestre', compact('alumnos', 'materia', 'trimestre_id'));
+    }
+
+    public function buscaCrea($alumno, $materia_id, $trimestre_id){
+        $desgloces = $alumno->desgloces;
+
+            foreach($desgloces as $desgloce){
+                if($desgloce->id_trimestre == $trimestre_id){
+                    if($desgloce->id_materia == $materia_id){ 
+                        return 0;
+                     }
+                }
+            }
+        
+
+        $nuevoDes = Desgloce_Calificaciones::create([
+            'actividades' => '0',
+            'proyecto' => '0',
+            'desempeno' => '0',
+            'total' => '0',
+            'id_alumno' => $alumno->id,
+            'id_materia' => $materia_id,
+            'id_trimestre' => $trimestre_id,
+        ]);
+
+        return 0;
+    }
+
+    public function evaluarGrupo(Request $request, $materia_id)
+    {
+        // Lógica para evaluar el grupo y almacenar las calificaciones
+        // ...
+
+        return redirect()->route('desgloce_calificaciones.evaluar-grupo', ['materia_id' => $materia_id])->with('success', 'Grupo evaluado exitosamente.');
+    }
+
+    public function subirEvaluacion(Request $request, $materia_id, $trimestre_id){
+        for($i = 0; $i < count($request->actividades); $i++){
+            return $request->actividades[$i];
+        }
     }
 }

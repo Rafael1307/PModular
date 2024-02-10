@@ -27,6 +27,11 @@ class Alumnos extends Model
     {
         return $this->hasMany(Calificaciones::class, 'id_alumno');
     }
+
+    public function desgloces()
+    {
+        return $this->hasMany(Desgloce_Calificaciones::class, 'id_alumno');
+    }
     
     public function tutores()
     {

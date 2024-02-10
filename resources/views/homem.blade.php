@@ -19,7 +19,7 @@
                                 @foreach ($materias as $materia)
                                     <h4> {{ $materiasList[$materia->materia] }}</h4>
                                     <p>(Grupo: {{ $materia->grupo->grado}} ° {{ $materia->grupo->grupo}})</p>
-                                    <a href="{{ url('/home')}}" class="btn btn-primary">Ir a materia</a>
+                                    <a href="{{ route('grupos.indexm', $materia->id)}}" class="btn btn-primary">Ir a materia</a>
                                 @endforeach
                             @endif
                         </div>

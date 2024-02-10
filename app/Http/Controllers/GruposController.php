@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Ciclos;
 use App\Models\Maestros;
 use App\Models\Alumnos;
+use App\Models\Materias;
 
 class GruposController extends Controller
 {
@@ -130,5 +131,33 @@ class GruposController extends Controller
 
         return redirect()->route('grupos.index',[$id_ciclo])->with('success', 'Grupo eliminado exitosamente.');
   
+    }
+
+    public function indexm(Materias $materia){
+
+        
+        $materiasList = $this->getMateriasList();
+        return view('grupos.indexm', compact('materia', 'materiasList'));
+    }
+    private function getMateriasList()
+    {
+        return [
+            '11' => 'Español',
+            '12' => 'Ingles',
+            '13' => 'Artes',
+            '21' => 'Matematicas',
+            '22' => 'Biologia',
+            '23' => 'Fisica',
+            '24' => 'Quimica',
+            '31' => 'Geografia',
+            '32' => 'Historia',
+            '33' => 'Formacion Civica y Etica',
+            '41' => 'Tecnologia',
+            '42' => 'Educacion Fisica',
+            '43' => 'Socioemocional',
+            '51' => 'Creatividad',
+            '52' => 'Performance',
+            '53' => 'FRyS',
+        ];
     }
 }
