@@ -40,7 +40,6 @@ use App\Http\Controllers\MateriasController;
 use App\Http\Controllers\DesgloceCalificacionesController;
 
 
-Route::resource('/calificaciones', CalificacionesController::class)->middleware(['auth','verified']);
 
 Route::resource('materias', MateriasController::class)->middleware(['auth','verified']);
 
@@ -100,6 +99,12 @@ Route::delete('/sisgrupos/{sisGrupo}', [SisGruposController::class, 'destroy'])-
 Route::get('/evaluar-grupo/{materia_id}', [DesgloceCalificacionesController::class, 'showEvaluarGrupo'])->name('desgloce_calificaciones.evaluartrimestre')->middleware(['auth','verified']);
 Route::post('/evaluar-grupo/{materia_id}/evaluar', [DesgloceCalificacionesController::class, 'showGrupo'])->name('desgloce_calificaciones.calificargrupo')->middleware(['auth','verified']);
 Route::put('/evaluar-grupo/{materia_id}/{trimestre_id}',  [DesgloceCalificacionesController::class, 'subirEvaluacion'])->name('desgloce_calificaciones.subirevaluacion')->middleware(['auth','verified']);
+
+Route::get('/calificar-grupo/{materia_id}', [CalificacionesController::class, 'showEvaluarGrupo'])->name('calificaciones.evaluartrimestre')->middleware(['auth','verified']);
+Route::post('/calificar-grupo/{materia_id}/evaluar', [CalificacionesController::class, 'showGrupo'])->name('calificaciones.calificargrupo')->middleware(['auth','verified']);
+Route::put('/calificar-grupo/{materia_id}/{trimestre_id}',  [CalificacionesController::class, 'subirEvaluacion'])->name('calificaciones.subirevaluacion')->middleware(['auth','verified']);
+
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/choose-role', [ChooseRoleController::class, 'show']);

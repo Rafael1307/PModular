@@ -148,8 +148,34 @@ class DesgloceCalificacionesController extends Controller
     }
 
     public function subirEvaluacion(Request $request, $materia_id, $trimestre_id){
-        for($i = 0; $i < count($request->actividades); $i++){
-            return $request->actividades[$i];
-        }
+        
+            for ($i = 0; $i < count($request->id); $i++){
+                $this->guardarCalificacion($request->id[$i], $request->actividades[$i], $request->desempeno[$i], $request->proyecto[$i]);
+            }
+
+            $materia = Materias::findOrFail($materia_id);
+            $grupo = $materia->grupo;
+            $alumnos = $grupo->alumnos;
+
+            return view('desgloce_calificaciones.calificartrimestre', compact('alumnos', 'materia', 'trimestre_id'));
+        
+    }
+
+    public function guardarCalificacion($calificacion_id, $actividades, $desempeno, $proyecto){
+
+        $registro = Desgloce_Calificaciones::findOrFail($calificacion_id);
+        $act = intval($actividades);
+        $des = intval($desempeno);
+        $pro = intval($proyecto);
+        $total = $act + $des + $pro;
+
+        $registro->update([
+            'actividades' => $act,
+            'desempeno' => $des,
+            'proyecto' => $pro,
+            'total' => $total,
+        ]);
+
+        $registro;
     }
 }

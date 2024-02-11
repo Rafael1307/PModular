@@ -9,7 +9,7 @@
             <h2>Opciones:</h2>
             <ul>
                 <li><a href="{{ route('desgloce_calificaciones.evaluartrimestre', $materia->id) }}">Evaluar Grupo</a></li>
-                <li><a href="#">Subir Calificaciones</a></li>
+                <li><a href="{{ route('calificaciones.evaluartrimestre', $materia->id) }}">Subir Calificaciones</a></li>
             </ul>
         </div>
 

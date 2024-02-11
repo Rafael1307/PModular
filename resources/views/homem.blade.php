@@ -26,7 +26,8 @@
                     </div>
                 </div>
             </div>
-        
+        </div>
+        <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"><h2>Mis Grupos</h2></div>

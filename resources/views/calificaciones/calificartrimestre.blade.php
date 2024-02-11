@@ -12,11 +12,12 @@
                     <th>Proyecto</th>
                     <th>Desempeño</th>
                     <th>Total</th>
+                    <th><b>Calificacion final</b></th>
                     <!-- Agrega más columnas según tus necesidades -->
                 </tr>
             </thead>
             <tbody>
-                <form action="{{ route('desgloce_calificaciones.subirevaluacion', ['materia_id' => $materia->id, 'trimestre_id' => $trimestre_id]) }}" method="post">
+                <form action="{{ route('calificaciones.subirevaluacion', ['materia_id' => $materia->id, 'trimestre_id' => $trimestre_id]) }}" method="post">
                 @csrf
                 @method('put')
                 @foreach ($alumnos as $alumno)
@@ -24,17 +25,27 @@
                 @if($calificacion->id_materia == $materia->id)
                 @if($calificacion->id_trimestre == $trimestre_id)
                     <tr>
-                        <td>{{ $calificacion->alumno->nombre }} {{ $calificacion->alumno->apellido }}<input value="{{ $calificacion->id}}" type="hidden" name="id[]"></td>
-                        <td><input value="{{$calificacion->actividades}}" type="number" name="actividades[]" required></td>
-                        <td><input value="{{$calificacion->proyecto}}" type="number" name="proyecto[]" required></td>
-                        <td><input value="{{$calificacion->desempeno}}" type="number" name="desempeno[]" required></td>
+                        <td>{{ $calificacion->alumno->nombre }} {{ $calificacion->alumno->apellido }}</td>
+                        <td>{{$calificacion->actividades}}</td>
+                        <td>{{$calificacion->proyecto}}</td>
+                        <td>{{$calificacion->desempeno}}</td>
                         <td>{{ $calificacion->total }}</td>
                         <!-- Agrega más columnas según tus necesidades -->
+                    
+                    @endif
+                    @endif
+                    @endforeach
+                    @foreach($alumno->calificaciones as $calificacion)
+                    @if($calificacion->id_materia == $materia->id)
+                    @if($calificacion->id_trimestre == $trimestre_id)
+                    <input value="{{ $calificacion->id}}" type="hidden" name="id[]">
+                    <td><input value="{{$calificacion->calificacion}}" type="number" name="calificacion[]" required></td>
                     </tr>
                     @endif
                     @endif
+                    @endforeach
                 @endforeach
-                @endforeach
+
                 <button type="submit" class="btn btn-primary">Guardar Evaluacion</button>
                 </form>
             </tbody>

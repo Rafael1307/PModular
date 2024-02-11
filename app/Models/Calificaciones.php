@@ -11,6 +11,13 @@ class Calificaciones extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'calificacion',
+        'id_alumno',
+        'id_materia',
+        'id_trimestre',
+    ];
+
     public function alumno()
     {
         return $this->belongsTo(Alumnos::class, 'id_alumno');
