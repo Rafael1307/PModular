@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        @if (Auth::user()->maestro)
         <h1>Bienvenido, {{ Auth::user()->maestro->nombre }} {{ Auth::user()->maestro->apellido }}</h1>
 
         @if(Auth::user()->rol == 1)
@@ -51,7 +52,10 @@
         </div>
 
         @endif
-
+        @endif
+        @if(!Auth::user()->maestro)
+            <h4>Espera a ser asignado como maestro o dirigete a administracion para validar la informacion</h4>
+        @endif
         {{-- Otros apartados según sea necesario --}}
     </div>
 @endsection

@@ -45,7 +45,7 @@ class GruposController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'grupo' => 'required|unique:grupos',
+            'grupo' => 'required',
             'grado' => 'required',
             'turno' => 'required',
             'id_asesor' => 'required',
@@ -98,8 +98,6 @@ class GruposController extends Controller
         $request->validate([
             'grupo' => 'required',
             'grado' => 'required',
-            'turno' => 'required',
-            'id_asesor' => 'required',
         ]);
 
         $grupo->update([
@@ -139,6 +137,8 @@ class GruposController extends Controller
         $materiasList = $this->getMateriasList();
         return view('grupos.indexm', compact('materia', 'materiasList'));
     }
+
+    
     private function getMateriasList()
     {
         return [

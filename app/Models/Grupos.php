@@ -30,4 +30,9 @@ class Grupos extends Model
     {
         return $this->hasMany(Alumnos::class, 'id_grupo');
     }
+
+    public function materias()
+    {
+        return $this->hasMany(Materias::class, 'id_grupo');
+    }
 }

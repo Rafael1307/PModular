@@ -13,6 +13,7 @@
                 <thead>
                     <tr>
                         <th>Materia</th>
+                        <th>Grupo</th>
                         <!-- Agrega otras columnas según sea necesario -->
                         <th>Acciones</th>
                     </tr>
@@ -21,6 +22,7 @@
                     @foreach ($materias as $materia)
                         <tr>
                             <td>{{ $materiasList[$materia->materia] }}</td>
+                            <td>{{$materia->grupo->grado}} ° {{ $materia->grupo->grupo}}</td>
                             <!-- Agrega otras columnas según sea necesario -->
                             <td>
                                 <a href="{{ route('materias.show', $materia->id) }}" class="btn btn-info">Ver</a>
@@ -32,5 +34,6 @@
                 </tbody>
             </table>
         @endif
+        <a href="{{ url('/home')}}" class="btn btn-primary">Volver</a>
     </div>
 @endsection

@@ -34,7 +34,7 @@
                 <select name="id_grupo" class="form-control" required>
                     @foreach ($grupos as $grupo)
                         <option value="{{ $grupo->id }}" {{ $alumno->id_grupo == $grupo->id ? 'selected' : '' }}>
-                            {{$grupo->grado}} {{ $grupo->grupo }}
+                            {{$grupo->grado}} {{ $grupo->grupo }} - {{ $grupo->turno}}
                         </option>
                     @endforeach
                 </select>

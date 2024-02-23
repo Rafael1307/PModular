@@ -72,6 +72,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
                                     </form>
+                                    <a href="{{ route('grupos.show', $grupo->id) }}" class="btn btn-info">Calificaciones</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -109,6 +110,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
                                     </form>
+                                    <a href="{{ route('sis_grupos.showtrimestres', $sisGrupo->id) }}" class="btn btn-info">Ver Calificaciones</a>
                                 </td>
                             </tr>
                         @endforeach

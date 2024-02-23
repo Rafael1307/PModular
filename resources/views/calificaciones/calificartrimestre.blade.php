@@ -26,10 +26,18 @@
                 @if($calificacion->id_trimestre == $trimestre_id)
                     <tr>
                         <td>{{ $calificacion->alumno->nombre }} {{ $calificacion->alumno->apellido }}</td>
+                        @if($calificacion->actividades)
                         <td>{{$calificacion->actividades}}</td>
                         <td>{{$calificacion->proyecto}}</td>
                         <td>{{$calificacion->desempeno}}</td>
                         <td>{{ $calificacion->total }}</td>
+                        @endif
+                        @if(!$calificacion->total)
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        @endif
                         <!-- Agrega más columnas según tus necesidades -->
                     
                     @endif

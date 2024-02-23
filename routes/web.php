@@ -82,6 +82,8 @@ Route::get('/grupos/{grupo}', [GruposController::class, 'show'])->name('grupos.s
 Route::get('/grupos/{grupo}/edit', [GruposController::class, 'edit'])->name('grupos.edit')->middleware(['auth','verified']);
 Route::put('/grupos/{grupo}', [GruposController::class, 'update'])->name('grupos.update')->middleware(['auth','verified']);
 Route::delete('/grupos/{grupo}', [GruposController::class, 'destroy'])->name('grupos.destroy')->middleware(['auth','verified']);
+//Route::get('/grupos/{grupo}/trimestre', [GruposController::class, 'showTrimestre'])->name('grupos.showtrimestre')->middleware(['auth','verified']);
+//Route::get('/grupos/{grupo}/{trimestre_id}', [GruposController::class, 'showCalificaciones'])->name('grupos.showcalificaciones')->middleware(['auth','verified']);
 
 Route::get('/grupos/{materia}/indexm', [GruposController::class, 'indexm'])->name('grupos.indexm')->middleware(['auth','verified']);
 
@@ -93,7 +95,8 @@ Route::get('/sisgrupos/{sisGrupo}', [SisGruposController::class, 'show'])->name(
 Route::get('/sisgrupos/{sisGrupo}/edit', [SisGruposController::class, 'edit'])->name('sis_grupos.edit')->middleware(['auth','verified']);
 Route::put('/sisgrupos/{sisGrupo}', [SisGruposController::class, 'update'])->name('sis_grupos.update')->middleware(['auth','verified']);
 Route::delete('/sisgrupos/{sisGrupo}', [SisGruposController::class, 'destroy'])->name('sis_grupos.destroy')->middleware(['auth','verified']);
-
+Route::get('/sisgrupos/{sisGrupo}/trimestre', [SisGruposController::class, 'showTrimestre'])->name('sis_grupos.showtrimestres')->middleware(['auth','verified']);
+Route::post('/sisgrupos/{sisGrupo}/calificaciones', [SisGruposController::class, 'showCalificaciones'])->name('sis_grupo.showcalificaciones')->middleware(['auth','verified']);
 
 
 Route::get('/evaluar-grupo/{materia_id}', [DesgloceCalificacionesController::class, 'showEvaluarGrupo'])->name('desgloce_calificaciones.evaluartrimestre')->middleware(['auth','verified']);

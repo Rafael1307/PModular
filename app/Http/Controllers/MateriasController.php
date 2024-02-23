@@ -113,8 +113,8 @@ class MateriasController extends Controller
 
         $materia->update([
             'materia' => $request->input('materia'),
-            'grupo_id' => $request->input('grupo_id'),
-            'maestro_id' => $request->input('maestro_id'),
+            'id_grupo' => $request->input('grupo_id'),
+            'id_maestro' => $request->input('maestro_id'),
             // Añade otros campos según sea necesario
         ]);
 

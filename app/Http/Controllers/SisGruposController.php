@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Ciclos;
 use App\Models\Maestros;
 use App\Models\Alumnos;
+use App\Models\Trimestres;
 
 class SisGruposController extends Controller
 {
@@ -117,5 +118,50 @@ class SisGruposController extends Controller
         $sisGrupo->delete();
 
         return redirect()->route('sis_grupos.index',[$id_ciclo])->with('success', 'Grupo del Sistema eliminado exitosamente.');
+    }
+
+    public function showTrimestre(Sis_Grupos $sisGrupo){
+
+        $ciclo = $sisGrupo->ciclo;
+        $trimestres = Trimestres::where('id_ciclo', $ciclo->id)->get();
+        return view('sis_grupos.showtrimestregrupo', compact('sisGrupo', 'trimestres'));
+
+    }
+
+    public function showCalificaciones(Request $request, Sis_Grupos $sisGrupo){
+
+        $trimestre_id = $request->input('trimestre');
+        $alumnopb = $sisGrupo->alumnos->first();
+        $grupopb = $alumnopb->grupo;
+        $materias = $grupopb->materias()->orderBy('materia')->get();
+        $alumnos = $sisGrupo->alumnos()->orderBy('apellido')->get();
+
+
+        $materiasList = $this->getMateriasList();
+
+
+        return view('sis_grupos.showcalificacionesgrupo', compact('sisGrupo','trimestre_id', 'materias', 'alumnos', 'materiasList'));
+    }
+
+    private function getMateriasList()
+    {
+        return [
+            '11' => 'Español',
+            '12' => 'Ingles',
+            '13' => 'Artes',
+            '21' => 'Matematicas',
+            '22' => 'Biologia',
+            '23' => 'Fisica',
+            '24' => 'Quimica',
+            '31' => 'Geografia',
+            '32' => 'Historia',
+            '33' => 'Formacion Civica y Etica',
+            '41' => 'Tecnologia',
+            '42' => 'Educacion Fisica',
+            '43' => 'Socioemocional',
+            '51' => 'Creatividad',
+            '52' => 'Performance',
+            '53' => 'FRyS',
+        ];
     }
 }

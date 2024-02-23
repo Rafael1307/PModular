@@ -31,9 +31,14 @@ class HomeController extends Controller
         }
         elseif(($user->rol) == 1){
             $maestro = Maestros::where('correo', $user->email)->first();
-            $materias = $maestro->materias;
-            $grupos = $maestro->grupos;
-            $materiasList = $this->getMateriasList();
+            if($maestro){
+                $materias = $maestro->materias;
+                $grupos = $maestro->grupos;
+            }else{
+                $materias = [];
+                $grupos = [];
+            }
+                $materiasList = $this->getMateriasList();
             return view('homem', compact('materias', 'grupos', 'materiasList'));
         }
         elseif(($user->rol) == 2){

@@ -31,7 +31,7 @@
                 <label for="id_grupo">Grupo:</label>
                 <select name="id_grupo" class="form-control" required>
                     @foreach ($grupos as $grupo)
-                        <option value="{{ $grupo->id }}"> {{$grupo->grado}} {{ $grupo->grupo }}</option>
+                        <option value="{{ $grupo->id }}"> {{$grupo->grado}} {{ $grupo->grupo }} - {{ $grupo->turno}}</option>
                     @endforeach
                 </select>
             </div>
