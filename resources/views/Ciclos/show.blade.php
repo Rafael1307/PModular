@@ -72,7 +72,7 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro?')">Eliminar</button>
                                     </form>
-                                    <a href="{{ route('grupos.show', $grupo->id) }}" class="btn btn-info">Calificaciones</a>
+                                    <a href="{{route('grupos.showtrimestres', $grupo->id) }}" class="btn btn-info">Calificaciones</a>
                                 </td>
                             </tr>
                         @endforeach

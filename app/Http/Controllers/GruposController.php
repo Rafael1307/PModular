@@ -8,6 +8,7 @@ use App\Models\Ciclos;
 use App\Models\Maestros;
 use App\Models\Alumnos;
 use App\Models\Materias;
+use App\Models\Trimestres;
 
 class GruposController extends Controller
 {
@@ -136,6 +137,29 @@ class GruposController extends Controller
         
         $materiasList = $this->getMateriasList();
         return view('grupos.indexm', compact('materia', 'materiasList'));
+    }
+
+    public function showTrimestre($grupo_id){
+        $grupo = Grupos::where('id', $grupo_id)->first();
+        $id_ciclo = $grupo->id_ciclo;
+
+        $trimestres = Trimestres::where('id_ciclo', $id_ciclo)->get();
+        return view('grupos.showtrimestregrupo', compact('grupo', 'trimestres'));
+
+    }
+
+    public function showCalificaciones(Request $request, Grupos $grupo){
+
+        $trimestre_id = $request->input('trimestre');
+      
+        $materias = $grupo->materias()->orderBy('materia')->get();
+        $alumnos = $grupo->alumnos()->orderBy('apellido')->get();
+
+
+        $materiasList = $this->getMateriasList();
+
+
+        return view('grupos.showcalificacionesgrupo', compact('grupo','trimestre_id', 'materias', 'alumnos', 'materiasList'));
     }
 
     

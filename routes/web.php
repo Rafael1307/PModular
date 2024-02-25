@@ -82,8 +82,8 @@ Route::get('/grupos/{grupo}', [GruposController::class, 'show'])->name('grupos.s
 Route::get('/grupos/{grupo}/edit', [GruposController::class, 'edit'])->name('grupos.edit')->middleware(['auth','verified']);
 Route::put('/grupos/{grupo}', [GruposController::class, 'update'])->name('grupos.update')->middleware(['auth','verified']);
 Route::delete('/grupos/{grupo}', [GruposController::class, 'destroy'])->name('grupos.destroy')->middleware(['auth','verified']);
-//Route::get('/grupos/{grupo}/trimestre', [GruposController::class, 'showTrimestre'])->name('grupos.showtrimestre')->middleware(['auth','verified']);
-//Route::get('/grupos/{grupo}/{trimestre_id}', [GruposController::class, 'showCalificaciones'])->name('grupos.showcalificaciones')->middleware(['auth','verified']);
+Route::get('/grupos/{sisGrupo}/trimestre', [GruposController::class, 'showTrimestre'])->name('grupos.showtrimestres')->middleware(['auth','verified']);
+Route::post('/grupos/{sisGrupo}/calificaciones', [GruposController::class, 'showCalificaciones'])->name('grupo.showcalificaciones')->middleware(['auth','verified']);
 
 Route::get('/grupos/{materia}/indexm', [GruposController::class, 'indexm'])->name('grupos.indexm')->middleware(['auth','verified']);
 

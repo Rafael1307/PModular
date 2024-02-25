@@ -19,10 +19,20 @@
                 <tr>
                     <td>{{$alumno->apellido}} {{$alumno->nombre}}</td>
                     @foreach($materias as $materia)
+                    @php
+                        $var = "N/A";
+                    @endphp
+
                     @foreach($alumno->calificaciones as $calificacion)
-                        <td>{{($calificacion->materia == $materia) ?(($calificacion->trimestre == $trimestre_id)? $calificacion->calificacion : "N/A"):"N/A"}}</td>
+                        @if($calificacion->id_materia == $materia->id && $calificacion->id_trimestre == $trimestre_id)
+                            @php
+                                $var = $calificacion->calificacion;
+                            @endphp
+                        @endif
                     @endforeach
-                    @endforeach
+
+                    <td>{{$var}}</td>
+                @endforeach
                 </tr>
                 @endforeach
 
