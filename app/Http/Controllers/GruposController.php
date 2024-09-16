@@ -157,6 +157,7 @@ class GruposController extends Controller
 
 
         $materiasList = $this->getMateriasList();
+        
 
 
         return view('grupos.showcalificacionesgrupo', compact('grupo','trimestre_id', 'materias', 'alumnos', 'materiasList'));
