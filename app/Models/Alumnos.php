@@ -23,6 +23,15 @@ class Alumnos extends Model
         return $this->belongsTo(Sis_Grupos::class, 'id_sis');
     }
 
+    public function calificacion_matematicas(){
+        $cals = $this->calificaciones->sortBy('created_at')->reverse();
+        foreach($cals as $cal){
+            if($cal->materia == '21'){
+                return $cal;
+            }
+        }
+    }
+
     public function calificaciones()
     {
         return $this->hasMany(Calificaciones::class, 'id_alumno');

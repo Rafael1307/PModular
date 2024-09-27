@@ -54,7 +54,7 @@ class MaestrosController extends Controller
         if ($request->hasFile('foto')) {
             $fotoPath = $request->file('foto')->store('uploads', 'public');
         } else {
-            $fotoPath = null;
+            $fotoPath = "perfil";
         }
     
         // Crear el maestro en la base de datos
