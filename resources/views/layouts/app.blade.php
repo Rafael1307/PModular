@@ -19,11 +19,17 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
+    <link rel="icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <div class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope" style="margin-left: 10px;">
+                    <span class="site-logo-img"><a href="{{ url('/adlr') }}" class="custom-logo-link" rel="home" aria-current="page"><img width="45" height="52" src="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" class="custom-logo" alt="Colegio Agustín De La Rosa" decoding="async" srcset="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg 45w, https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-262x300.jpg 262w, https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo.jpg 578w" sizes="(max-width: 45px) 100vw, 45px" /></a></span>
+                </div>
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     Gestor Adlr
                 </a>
@@ -38,7 +44,7 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto" class="menu">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))

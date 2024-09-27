@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <h1>Elige tu Rol</h1>
 
     <form action="/choose-role" method="post">
