@@ -38,6 +38,7 @@ use App\Http\Controllers\GruposController;
 use App\Http\Controllers\SisGruposController;
 use App\Http\Controllers\MateriasController;
 use App\Http\Controllers\DesgloceCalificacionesController;
+use App\Http\Controllers\NotasController;
 
 
 
@@ -60,6 +61,10 @@ Route::get('/tutores/{tutor}/edit', [TutoresController::class, 'edit'])->name('t
 Route::put('/tutores/{tutor}', [TutoresController::class, 'update'])->name('tutores.update')->middleware(['auth','verified']);
 Route::delete('/tutores/{tutor}', [TutoresController::class, 'destroy'])->name('tutores.destroy')->middleware(['auth','verified']);
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('notas/crear/{materia}/{alumno}', [NotasController::class, 'create'])->name('notas.create');
+    Route::post('notas/guardar/{materia}/{alumno}', [NotasController::class, 'store'])->name('notas.store');
+});
 
 // Rutas para Ciclos
 Route::resource('/ciclos', CiclosController::class)->middleware(['auth','verified']);
@@ -86,6 +91,10 @@ Route::get('/grupos/{sisGrupo}/trimestre', [GruposController::class, 'showTrimes
 Route::post('/grupos/{sisGrupo}/calificaciones', [GruposController::class, 'showCalificaciones'])->name('grupo.showcalificaciones')->middleware(['auth','verified']);
 
 Route::get('/grupos/{materia}/indexm', [GruposController::class, 'indexm'])->name('grupos.indexm')->middleware(['auth','verified']);
+
+Route::get('/maestros/grupos', [GruposController::class, 'gruposDelMaestro'])->name('maestro.grupos')->middleware('auth');
+Route::get('/grupo/{grupo}/alumnos', [GruposController::class, 'alumnosDelGrupo'])->name('grupo.alumnos')->middleware('auth');
+Route::get('/alumno/{alumno}/grupo/{grupo}/detalle', [AlumnosController::class, 'detalleAlumno'])->name('alumno.detalle')->middleware('auth');
 
 // Rutas para Grupos de sistema
 Route::get('/sisgrupos/create/{id_ciclo}', [SisGruposController::class, 'create'])->name('sis_grupos.create')->middleware(['auth','verified']);

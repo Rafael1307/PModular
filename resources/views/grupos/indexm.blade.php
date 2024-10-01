@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+@if(session('success'))
+<div class="alert alert-success" role="alert">
+    <h4><span>{{session('success')}}</span></h4>
+</div>
+@endif
     <div class="container">
         <h1>Opciones de Evaluación para la Materia:{{ $materiasList[$materia->materia] }}</h1>
         <p>(Grupo: {{ $materia->grupo->grado}} ° {{ $materia->grupo->grupo}})</p>
@@ -29,7 +34,7 @@
                             <td>{{ $alumno->nombre }}</td>
                             <td>{{ $alumno->apellido }}</td>
                             <td>
-                                <a href="#">
+                                <a href="{{ route('notas.create', ['materia' => $materia->id, 'alumno' => $alumno->id]) }}" class="btn btn-secondary">
                                     Agregar Nota
                                 </a>
                             </td>

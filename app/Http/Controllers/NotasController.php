@@ -5,98 +5,48 @@ namespace App\Http\Controllers;
 use App\Models\Notas;
 use Illuminate\Http\Request;
 use App\Models\Alumnos;
+use App\Models\Maestros;
 
 class NotasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+    public function create($id_materia, $id_alumno)
+{
+    // Lista de asuntos que pueden seleccionarse
+    $asuntos = [
+        'Excelente rendimiento académico',
+        'Participación destacada en clase',
+        'Mejoría notable',
+        'Trabajo en equipo sobresaliente',
+        'Entrega puntual de tareas',
+        'Creatividad en proyectos',
+        'Falta de entrega de tareas',
+        'Distracción constante en clase',
+        'Problemas de conducta',
+    ];
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create($alumno_id)
-    {
-        //
-    }
+    // Obtener el alumno por su ID
+    $alumno = Alumnos::findOrFail($id_alumno);
+    return view('notas.create', compact('alumno', 'asuntos', 'id_materia'));
+}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+public function store(Request $request, $id_materia, $id_alumno)
+{
+    $request->validate([
+        'asunto' => 'required|string',
+        'descripcion' => 'required|string',
+    ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Notas  $notas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Notas $notas)
-    {
-        //
-    }
+        
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Notas  $notas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Notas $notas)
-    {
-        //
-    }
+        Notas::create([
+            'asunto' => $request->input('asunto'),
+            'descripcion' => $request->input('descripcion'),
+            'id_alumno' => $id_alumno,
+            'id_maestro' => auth()->user()->maestro->id,
+            // Añade otros campos según sea necesario
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Notas  $notas
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Notas $notas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Notas  $notas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Notas $notas)
-    {
-        //
-    }
-
-    private function getAsuntosList()
-    {
-        return [
-            '1' => 'Salidas constantes',
-            '2' => 'Mal comportamiento en clase',
-            '3' => 'No trae material',
-            '4' => 'No entrega tareas',
-            '5' => 'Desempeño bajo',
-            '6' => 'Desempeño destacable',
-            '7' => 'Accidente durante clase',
-            '8' => 'Accidente fuera de clase',
-            '9' => 'Respuesta a asesor',
-            '10' => 'Otro',
-        ];
-    }
+       // Redireccionamos a la página de grupos con el ID de la materia
+    return redirect()->route('grupos.indexm', $id_materia)->with('success', 'Nota agregada exitosamente.');
+}
 }

@@ -7,6 +7,7 @@ use App\Models\Alumnos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Grupos;
+use App\Models\Calificaciones;
 use App\Models\Sis_Grupos;
 
 class AlumnosController extends Controller
@@ -149,4 +150,72 @@ class AlumnosController extends Controller
         return redirect()->route('alumnos.index')->with('success', 'Alumno eliminado exitosamente.');
     
     }
+
+    private function getMateriasList()
+{
+    return [
+        '11' => 'Español',
+        '12' => 'Ingles',
+        '13' => 'Artes',
+        '21' => 'Matematicas',
+        '22' => 'Biologia',
+        '23' => 'Fisica',
+        '24' => 'Quimica',
+        '31' => 'Geografia',
+        '32' => 'Historia',
+        '33' => 'Formacion Civica y Etica',
+        '41' => 'Tecnologia',
+        '42' => 'Educacion Fisica',
+        '43' => 'Socioemocional',
+        '51' => 'Creatividad',
+        '52' => 'Performance',
+        '53' => 'FRyS',
+    ];
+}
+
+public function getNombreMateria($codigo)
+{
+    $materias = $this->getMateriasList();
+    return $materias[$codigo] ?? 'Materia desconocida';
+}
+
+public function mostrarCalificaciones($alumnoId)
+{
+    $calificaciones = Calificaciones::where('id_alumno', $alumnoId)->get();
+    
+    // Convertir el código de materia al nombre correspondiente
+    $materias = $this->getMateriasList();
+
+    return view('nombre_de_la_vista', compact('calificaciones', 'materias'));
+}
+
+
+
+    public function detalleAlumno($alumno_id, $grupo_id)
+    {
+        $alumno = Alumnos::findOrFail($alumno_id);
+        $grupo = Grupos::findOrFail($grupo_id);
+    
+        // Obtener el ciclo actual
+        $cicloActual = $grupo->ciclo;
+    
+        // Obtener los trimestres y las calificaciones del ciclo actual
+        $trimestres = $cicloActual->trimestres;
+        $calificacionesPorTrimestre = [];
+    
+        foreach ($trimestres as $trimestre) {
+            $calificacionesPorTrimestre[$trimestre->nombre] = $alumno->calificaciones()
+                ->where('id_trimestre', $trimestre->id)
+                ->get();
+        }
+    
+        // Obtener las notas del alumno
+        $notas = $alumno->notas;
+
+        $materiasList = $this->getMateriasList();
+    
+        return view('maestros.alumno_detalle', compact('alumno', 'calificacionesPorTrimestre', 'notas', 'cicloActual', 'materiasList'));
+    }
+    
+
 }

@@ -46,4 +46,9 @@ class Alumnos extends Model
     {
         return $this->belongsToMany(Tutores::class, 'alumnos__tutores', 'id_alumno', 'id_tutor');
     }
+
+    public function notas()
+    {
+        return $this->hasMany(Notas::class, 'id_alumno');
+    }
 }

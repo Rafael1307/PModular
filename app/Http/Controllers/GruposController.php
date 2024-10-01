@@ -185,4 +185,23 @@ class GruposController extends Controller
             '53' => 'FRyS',
         ];
     }
+
+    public function gruposDelMaestro()
+    {
+        // Obtén el maestro logeado
+        $maestro = auth()->user();
+
+        // Obtén los grupos que asesora el maestro
+        $grupos = $maestro->grupos;
+
+        return view('maestro.grupos', compact('grupos'));
+    }
+
+    public function alumnosDelGrupo($grupo_id)
+    {
+        $grupo = Grupos::findOrFail($grupo_id);
+        $alumnos = $grupo->alumnos;
+
+        return view('maestros.alumnos', compact('grupo', 'alumnos'));
+    }
 }

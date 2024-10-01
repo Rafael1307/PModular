@@ -42,7 +42,7 @@
                                 @foreach ($grupos as $grupo)
                                     <h4> {{ $grupo->grado}} ° {{ $grupo->grupo}}</h4>
                                     
-                                    <a href="{{ url('/home')}}" class="btn btn-primary">Ir a grupo</a>
+                                    <a href="{{route('grupo.alumnos', ['grupo' => $grupo->id])}}" class="btn btn-primary">Ir a grupo</a>
                                 @endforeach
                             @endif
                         </div>

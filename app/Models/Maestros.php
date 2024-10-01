@@ -28,4 +28,12 @@ class Maestros extends Model
         return $this->hasMany(Materias::class, 'id_maestro');
     }
 
+    
+
+    // En el modelo Maestro
+    public function notas()
+    {
+        return $this->hasMany(Notas::class, 'id_maestro');
+    }
+
 }
