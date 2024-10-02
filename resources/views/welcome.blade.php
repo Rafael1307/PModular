@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 	 <link rel="profile" href="https://gmpg.org/xfn/11"> 
 	 <title>Colegio Agustín De La Rosa &#8211; Entran para aprender, salen para servir</title>
+     <link href="{{ asset('css/inicio.css') }}" rel="stylesheet">
 <meta name='robots' content='max-image-preview:large' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
 <link rel="alternate" type="application/rss+xml" title="Colegio Agustín De La Rosa &raquo; Feed" href="https://colegioagustindelarosa.edu.mx/feed/" />
