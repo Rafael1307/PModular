@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+    body {
+    background-image: url('../../storage/uploads/FondoGris.png');
+    background-repeat: repeat;
+    background-size: auto; 
+}
+</style>
     <h1>Elige tu Rol</h1>
 
     <form action="/choose-role" method="post">

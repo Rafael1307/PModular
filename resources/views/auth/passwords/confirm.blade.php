@@ -1,6 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        body {
+    background-image: url('../../storage/uploads/waves.gif');
+    background-repeat: repeat;
+    background-size: auto; 
+}
+</style>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">

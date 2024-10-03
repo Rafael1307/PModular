@@ -1,6 +1,29 @@
 @extends('layouts.app')
 
 @section('content')
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>Gestor Adlr</title>
+    <link rel="profile" type="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg">
+
+    <!-- Scripts -->
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poetsen+One&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/homeM.css') }}" rel="stylesheet">
+    
+    <link rel="icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
+    <link rel="shortcut icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
+</head>
     <div class="container">
         @if (Auth::user()->maestro)
         <h1>Bienvenido, {{ Auth::user()->maestro->nombre }} {{ Auth::user()->maestro->apellido }}</h1>

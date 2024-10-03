@@ -25,6 +25,41 @@
     <link rel="icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
     <link rel="shortcut icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
 </head>
+<style>
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .table {
+            background-color: #424549;
+            color: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .table thead th {
+            background-color: #424549;
+            border-bottom: none;
+            padding: 15px;
+            color: white;
+        }
+        .table td {
+            background-color: #424549;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .table tr {
+            display: flex;
+            margin-bottom: 5px;
+        }
+        .table td:nth-child(1) { flex: 2; }
+        .table td:nth-child(2) { flex: 1; }
+        .table td:nth-child(3) { flex: 1; }
+        .btn-primary, .btn-info, .btn-warning {
+            margin: 2px;
+        }
+    </style>
     <div class="container">
         <h1>Listado de Tutores</h1>
 

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<a href="{{ route('grupos.indexm', $materia->id)}}" class="btn btn-primary">Volver a materia</a>
     <div class="container">
         <h1>Evaluar Grupo - Materia: {{ $materia->nombre }}</h1>
 
@@ -13,9 +14,10 @@
                 @endforeach
             </select>
             <button type="submit">Evaluar Grupo</button>
+            <a href="{{ route('home') }}" class="btn btn-primary">Volver</a>
         </form>
 
         
-        <a href="{{ route('home') }}" class="btn btn-primary">Volver</a>
+        
     </div>
 @endsection
