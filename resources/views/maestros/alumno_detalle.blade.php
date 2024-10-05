@@ -38,8 +38,8 @@
     </style>
 <div class="container">
     <h2>Sugerencias para maestros</h2>
-    @foreach ($sugerencias as $sugerencias) 
-        <h3>{{$sugerencias->name}}</h3>
+    @foreach ($sugerencias as $sugerencia) 
+        <h3>{{$sugerencia}}</h3>
     @endforeach
 </div>
 <div class="container">
