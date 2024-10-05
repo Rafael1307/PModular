@@ -26,6 +26,10 @@
     <link rel="icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
     <link rel="shortcut icon" href="https://colegioagustindelarosa.edu.mx/wp-content/uploads/2023/07/cropped-logo-45x52.jpg" type="image/x-icon">
 </head>
+<style>
+
+
+</style>
 <div class="alert alert-success" role="alert">
     <h4><span>{{session('success')}}</span></h4>
 </div>
