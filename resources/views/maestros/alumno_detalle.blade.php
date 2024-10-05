@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+    <h2>Sugerencias para maestros</h2>
+    @foreach ($sugerencias as $sugerencias) 
+        <h3>{{$sugerencias->name}}</h3>
+    @endforeach
+</div>
+<div class="container">
     <h1>Detalles de {{ $alumno->nombre }} {{ $alumno->apellido }}</h1>
 
     <h3>Calificaciones del Ciclo {{ $cicloActual->nombre }}</h3>

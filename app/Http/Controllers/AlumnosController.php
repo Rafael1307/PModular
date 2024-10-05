@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Grupos;
 use App\Models\Calificaciones;
 use App\Models\Sis_Grupos;
+use App\Models\Notas;
 
 class AlumnosController extends Controller
 {
@@ -213,9 +214,67 @@ public function mostrarCalificaciones($alumnoId)
         $notas = $alumno->notas;
 
         $materiasList = $this->getMateriasList();
+
+        $sugerencias = $this->arbolDesicion($alumno_id);
     
-        return view('maestros.alumno_detalle', compact('alumno', 'calificacionesPorTrimestre', 'notas', 'cicloActual', 'materiasList'));
+        return view('maestros.alumno_detalle', compact('alumno', 'calificacionesPorTrimestre', 'notas', 'cicloActual', 'materiasList', 'sugerencias'));
     }
     
+    public function arbolDesicion($alumnoId) {
+        // Obtener calificaciones del alumno
+        $calificaciones = Calificaciones::where('id_alumno', $alumnoId)->get();
+        
+        // Inicializar la nota de apoyo
+        $sugerencias = [];
 
+        // Recuperar las calificaciones por materia
+        $matematicas = $calificaciones->where('id_materia', 21)->first()->calificacion ?? 0; // Código 21 para Matemáticas
+        $espanol = $calificaciones->where('id_materia', 11)->first()->calificacion ?? 0; // Código 11 para Español
+        $formacionCivica = $calificaciones->where('id_materia', 33)->first()->calificacion ?? 0; // Código 33 para Formación Cívica
+        $educacionFisica = $calificaciones->where('id_materia', 42)->first()->calificacion ?? 0; // Código 42 para Educación Física
+
+        // Recuperar las notas del alumno
+        $notas = Notas::where('id_alumno', $alumnoId)->get();
+        $felicitaciones = $notas->where('asunto', 'Felicitación')->count();
+        $problemasConducta = $notas->where('asunto', 'Problema de Conducta')->count();
+        $problemasAcademicos = $notas->where('asunto', 'Problema Académico')->count();
+
+        // Árbol de decisiones basado en las notas
+        if ($felicitaciones > $problemasConducta && $felicitaciones > $problemasAcademicos) {
+            $sugerencias[] = "El estudiante muestra un comportamiento ejemplar.";
+        } elseif ($problemasConducta > $felicitaciones && $problemasConducta > $problemasAcademicos) {
+            $sugerencias[] = "El estudiante necesita mejorar su conducta.";
+        } elseif ($problemasAcademicos > $felicitaciones && $problemasAcademicos > $problemasConducta) {
+            $sugerencias[] = "El estudiante requiere apoyo académico adicional.";
+        }
+
+        // Promedio de las materias clave
+        $promedio = ($matematicas + $espanol + $formacionCivica + $educacionFisica) / 4;
+
+    if ($promedio >= 9) {
+        $sugerencias[] = "Excelente desempeño académico en general.";
+    } elseif ($promedio >= 7 && $promedio < 9) {
+        $sugerencias[] = "Buen desempeño académico, pero hay espacio para mejorar.";
+    } else {
+        $sugerencias[] = "Se requiere atención especial en el desempeño académico.";
+    }
+
+        // Análisis de materias individuales
+        if ($matematicas < 7) {
+            $sugerencias[] = "Necesita refuerzo en matemáticas.";
+        }
+        if ($espanol < 7) {
+            $sugerencias[] = "Necesita refuerzo en español.";
+        }
+        if ($formacionCivica < 7) {
+            $sugerencias[] = "Necesita mejorar en formación cívica.";
+        }
+        if ($educacionFisica < 7) {
+            $sugerencias[] = "Necesita mejorar en educación física.";
+        }
+    
+        // Retornar el array de sugerencias
+        return $sugerencias;
+    }
 }
+

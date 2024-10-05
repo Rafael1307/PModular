@@ -13,15 +13,9 @@ class NotasController extends Controller
 {
     // Lista de asuntos que pueden seleccionarse
     $asuntos = [
-        'Excelente rendimiento académico',
-        'Participación destacada en clase',
-        'Mejoría notable',
-        'Trabajo en equipo sobresaliente',
-        'Entrega puntual de tareas',
-        'Creatividad en proyectos',
-        'Falta de entrega de tareas',
-        'Distracción constante en clase',
-        'Problemas de conducta',
+        'Felicitación',
+        'Problema de Conducta',
+        'Problema Académico',
     ];
 
     // Obtener el alumno por su ID
